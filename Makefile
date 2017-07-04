@@ -20,11 +20,17 @@ container_runner: stop
 	-docker run --name $(CONTAINER_NAME) \
     	$(DAEMON_ARG) \
     	-p 8080:8080 \
-		-v $(DATA_DIR):/data/certs \
         $(IMAGE_NAME)
 
 	-@sleep 2
 	-@docker ps | grep $(CONTAINER_NAME)
+
+shell_docker: stop
+	-docker exec -it \
+    	-p 8080:8080 \
+		-v $(DATA_DIR):/data/certs \
+        $(IMAGE_NAME) \
+		/bin/sh
 
 set_daemon:
 	$(eval DAEMON_ARG=-d)
