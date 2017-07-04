@@ -21,6 +21,7 @@ container_runner: stop
     	$(DAEMON_ARG) \
     	-p 8080:8080 \
 		-v $(DATA_DIR):/data/certs \
+		-v /var/run/docker.sock:/var/run/docker.sock \
         $(IMAGE_NAME)
 
 	-@sleep 2
