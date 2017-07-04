@@ -19,7 +19,7 @@ test_docker: container_runner
 container_runner: stop
 	-docker run --name $(CONTAINER_NAME) \
     	$(DAEMON_ARG) \
-    	-p 8080:8080 \
+    	-p 8443:443 \
 		-v $(DATA_DIR):/data/certs \
 		-v /var/run/docker.sock:/var/run/docker.sock \
         $(IMAGE_NAME)
@@ -29,7 +29,7 @@ container_runner: stop
 
 shell_docker: stop
 	-docker exec -it \
-    	-p 8080:8080 \
+    	-p 8443:8443 \
 		-v $(DATA_DIR):/data/certs \
         $(IMAGE_NAME) \
 		/bin/sh
@@ -44,7 +44,7 @@ stop:
 logs:
 	-@docker logs $(CONTAINER_NAME)
 
-push: container
+push: image
 	docker push $(IMAGE_NAME):latest
 
 certs: cert_ca cert_server cert_client
