@@ -1,3 +1,3 @@
 FROM nginx:alpine
-MAINTAINER Kevin Krummenauer <kevin@whiledo.de>
+MAINTAINER Roaan Vos <roaanv@0112.io>
 ADD resources/nginx-cert.conf /etc/nginx/conf.d/nginx-cert.conf
