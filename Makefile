@@ -3,6 +3,7 @@ DOCKER_USER ?= roaanv/
 IMAGE_NAME = $(DOCKER_HOST)$(DOCKER_USER)docker-api-proxy
 CONTAINER_NAME = docker-api-proxy
 DATA_DIR ?= /Users/rvos/mycode/docker-remote-api-tls/data/certs
+CERT_MAKER := bin/create-certs.sh
 
 all: build
 
@@ -37,3 +38,15 @@ logs:
 
 push: container
 	docker push $(IMAGE_NAME):latest
+
+certs: cert_ca cert_server cert_client
+
+cert_ca:
+	$(CERT_MAKER) -m ca -h unseen.spacehuis.net -pw secret -t data/certs --ca-subj
+
+cert_server:
+	$(CERT_MAKER) -m server -hip 192.168.1.41 -h unseen.spacehuis.net -pw secret -t data/certs
+
+cert_client:
+	$(CERT_MAKER) -m client -h unseen.spacehuis.net -pw secret -t data/certs
+
