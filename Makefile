@@ -20,6 +20,7 @@ container_runner: stop
 	-docker run --name $(CONTAINER_NAME) \
     	$(DAEMON_ARG) \
     	-p 8080:8080 \
+		-v $(DATA_DIR):/data/certs \
         $(IMAGE_NAME)
 
 	-@sleep 2
