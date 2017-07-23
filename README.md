@@ -64,3 +64,4 @@ Here is a simple example configuration, where /home/me/my/cert/dir contains `cer
 
 `mvn docker:build` generates the "newimage" by Dockerfile via the remote API. Use gzip as compression here, if you get an exception.  
 `mvn docker:start` starts httpd and newimage.
+
